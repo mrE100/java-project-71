@@ -1,4 +1,4 @@
-package io.hexlet.app;
+package hexlet.code;
 
 import java.util.*;
 
