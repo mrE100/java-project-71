@@ -1,6 +1,11 @@
 package hexlet.code;
 
-import java.util.*;
+import java.util.List;
+import java.util.Collections;
+import java.util.Set;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Differ {
     public static String generate(Map<String, String> value1, Map<String, String> value2) {
@@ -25,7 +30,8 @@ public class Differ {
                     operation = "     ";
                     keyValue = value1.get(key);
                 } else {
-                    builder.append("   - ").append(key).append(": ").append(String.valueOf(value1.get(key))).append("\n");
+                    builder.append("   - ").append(key).append(": ")
+                            .append(String.valueOf(value1.get(key))).append("\n");
                     operation = "   + ";
                     keyValue = value2.get(key);
                 }
