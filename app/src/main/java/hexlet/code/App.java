@@ -6,14 +6,15 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-@Command(name = "gendiff", mixinStandardHelpOptions = true, version = "genfiff 1.0",
+@Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 1.0",
         description = "Compares two configuration files and shows a difference.")
 
 
@@ -25,15 +26,15 @@ public class App implements Callable {
     private Path filepath2;
 
     @Option(names = {"-f", "--format=format"}, description = "output format [default: stylish]")
-    private String format = "stylish";
+//    private String format = "stylish";
 
-    private ObjectMapper mapper = new ObjectMapper();
+//    private ObjectMapper mapper = new ObjectMapper();
 
     @Override
     public Object call() throws Exception {
 
-        Map<String, String> firstFile = new HashMap<>();
-        Map<String, String> secondFile = new HashMap<>();
+//        Map<String, String> firstFile = new HashMap<>();
+//        Map<String, String> secondFile = new HashMap<>();
         try {
             Path path1 = Paths.get(String.valueOf(filepath1)).toAbsolutePath().normalize();
             Map<String, String> value1 = parse(Files.readString(path1));
