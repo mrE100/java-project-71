@@ -27,7 +27,7 @@ public class AppTest {
     @DisplayName("'main' method works correctly")
     void testMain() {
         log.debug("Start test");
-        App.main(new String[]{"filepath1.json filepath2.json"});
+        App.main(new String[]{"filepath1.json", "filepath2.json"});
         assertEquals("{\n"
                 + "  - follow: false\n"
                 + "    host: hexlet.io\n"
