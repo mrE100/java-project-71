@@ -26,8 +26,8 @@ public class App implements Callable<Object> {
     @Parameters(index = "1", description = "path to second file")
     private Path filepath2;
 
-    @Option(names = {"-f", "--format=format"}, description = "output format [default: stylish]")
-//    private String format = "stylish";
+    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]")
+    private String format = "stylish";
 
 //    private ObjectMapper mapper = new ObjectMapper();
 
