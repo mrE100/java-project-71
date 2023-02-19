@@ -19,12 +19,14 @@ import java.util.concurrent.Callable;
         description = "Compares two configuration files and shows a difference.")
 
 
-public class App implements Callable<Object> {
+public class App implements Callable<Integer> {
+    private static final int SUCCESS_EXIT_CODE = 1;
+    private static final int ERROR_EXIT_CODE = 1;
     @Parameters(index = "0", description = "path to first file")
-    private Path filepath1;
+    private String filepath1;
 
     @Parameters(index = "1", description = "path to second file")
-    private Path filepath2;
+    private String filepath2;
 
     @Option(names = {"-f", "--format"}, description = "output format [default: stylish]")
     private String format = "stylish";
@@ -32,18 +34,13 @@ public class App implements Callable<Object> {
 //    private ObjectMapper mapper = new ObjectMapper();
 
     @Override
-    public Object call() throws Exception {
-
-//        Map<String, String> firstFile = new HashMap<>();
-//        Map<String, String> secondFile = new HashMap<>();
-
-        Path path1 = Paths.get(String.valueOf(filepath1)).toAbsolutePath().normalize();
-        Map<String, String> value1 = Parser.parse(Files.readString(path1));
-        Path path2 = Paths.get(String.valueOf(filepath2)).toAbsolutePath().normalize();
-        Map<String, String> value2 = Parser.parse(Files.readString(path2));
-        System.out.println(Differ.generate(value1, value2));
-
-        return 0;
+    public Integer call() throws Exception {
+        try {
+            System.out.println(Differ.generate(filepath1, filepath2));
+            return SUCCESS_EXIT_CODE;
+        } catch (Exception e) {
+            return ERROR_EXIT_CODE;
+        }
     }
 
 //    private static Map<String, String> parse(String content) throws Exception {

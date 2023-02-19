@@ -1,5 +1,9 @@
 package hexlet.code;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Collections;
 import java.util.Set;
@@ -8,9 +12,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Differ {
-    public static String generate(Map<String, String> value1, Map<String, String> value2) {
+    public static String generate(String filepath1, String filepath2) throws Exception {
+
+        Path path1 = Paths.get(filepath1).toAbsolutePath().normalize();
+        Map<String, String> value1 = Parser.parse(Files.readString(path1));
+        Path path2 = Paths.get(filepath2).toAbsolutePath().normalize();
+        Map<String, String> value2 = Parser.parse(Files.readString(path2));
         StringBuilder builder = new StringBuilder();
-        builder.append("{\n");
+        builder.append("{\r\n");
         Set<String> keys = new HashSet<>();
         keys.addAll(value1.keySet());
         keys.addAll((value2.keySet()));
@@ -31,12 +40,12 @@ public class Differ {
                     keyValue = value1.get(key);
                 } else {
                     builder.append("   - ").append(key).append(": ")
-                            .append(String.valueOf(value1.get(key))).append("\n");
+                            .append(String.valueOf(value1.get(key))).append("\r\n");
                     operation = "   + ";
                     keyValue = value2.get(key);
                 }
             }
-            builder.append(operation).append(key).append(": ").append(keyValue).append("\n");
+            builder.append(operation).append(key).append(": ").append(keyValue).append("\r\n");
         }
         builder.append("}");
         return builder.toString();

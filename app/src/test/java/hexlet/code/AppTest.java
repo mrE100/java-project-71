@@ -2,47 +2,52 @@ package hexlet.code;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
+//import java.io.ByteArrayOutputStream;
+import java.io.File;
+//import java.io.PrintStream;
+//import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import org.junit.jupiter.api.*;
 
-import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 
-@Slf4j
 public class AppTest {
-    private final PrintStream standardOut = System.out;
-    private final ByteArrayOutputStream output = new ByteArrayOutputStream();
+//    private static String resourcesPath;
+    private static String jsonFilePath1;
+    private static String jsonFilePath2;
+    private static String yamlFilePath1;
+    private static String yamlFilePath2;
 
-    @BeforeEach
-    public void setUp() {
-        System.setOut(new PrintStream(output));
+    @BeforeAll
+    public static void beforeAll() {
+//        resourcesPath = new File(".").getAbsolutePath();
+
+        jsonFilePath1 = "filepath1.json";
+        jsonFilePath2 = "filepath2.json";
+
+        yamlFilePath1 = "filepath1.yml";
+        yamlFilePath2 = "filepath2.yml";
     }
 
     @Test
-    @DisplayName("'main' method works correctly")
-    void testMain() {
-        log.debug("Start test");
-        System.out.println("++++++++++++++++++++");
-        App.main(new String[]{"filepath1.json", "filepath2.json"});
-        System.out.println("***********************");
-        assertEquals("{\n"
-                + "  - follow: false\n"
-                + "    host: hexlet.io\n"
-                + "  - proxy: 123.234.53.22\n"
-                + "  - timeout: 50\n"
-                + "  + timeout: 20\n"
-                + "  + verbose: true\n"
-                + "}", output.toString(StandardCharsets.UTF_8).trim());
-        System.out.println("****************************");
+    public void testJson() throws Exception {
+        testAbstract(jsonFilePath1, jsonFilePath2);
     }
 
-    @AfterEach
-    public void tearDown() {
-        System.setOut(standardOut);
+    @Test
+    public void testYaml() throws Exception {
+        testAbstract(yamlFilePath1, yamlFilePath2);
+    }
+
+    @DisplayName("'main' method works correctly")
+
+    private void testAbstract(String filePath1, String filePath2) throws Exception {
+        var path = Paths.get("src\\test\\resources\\expected").toAbsolutePath().normalize();
+        var expected = Files.readString(path);
+        var actual = Differ.generate(filePath1, filePath2);
+
+        assertEquals(expected, actual);
     }
 }
