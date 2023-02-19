@@ -21,7 +21,7 @@ public class Differ {
         builder.append("{\r\n");
         Set<String> keys = new HashSet<>();
         keys.addAll(value1.keySet());
-        keys.addAll((value2.keySet()));
+        keys.addAll(value2.keySet());
         List<String> sortedKeys = new ArrayList<>(keys);
         Collections.sort(sortedKeys);
         String operation;
