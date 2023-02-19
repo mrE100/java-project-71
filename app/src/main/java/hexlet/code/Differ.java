@@ -18,7 +18,7 @@ public class Differ {
         Path path2 = Paths.get(filepath2).toAbsolutePath().normalize();
         Map<String, String> value2 = Parser.parse(Files.readString(path2));
         StringBuilder builder = new StringBuilder();
-        builder.append("{\r\n");
+        builder.append("{\n");
         Set<String> keys = new HashSet<>();
         keys.addAll(value1.keySet());
         keys.addAll(value2.keySet());
@@ -39,12 +39,12 @@ public class Differ {
                     keyValue = value1.get(key);
                 } else {
                     builder.append("   - ").append(key).append(": ")
-                            .append(String.valueOf(value1.get(key))).append("\r\n");
+                            .append(String.valueOf(value1.get(key))).append("\n");
                     operation = "   + ";
                     keyValue = value2.get(key);
                 }
             }
-            builder.append(operation).append(key).append(": ").append(keyValue).append("\r\n");
+            builder.append(operation).append(key).append(": ").append(keyValue).append("\n");
         }
         builder.append("}");
         return builder.toString();
