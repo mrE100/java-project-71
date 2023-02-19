@@ -43,7 +43,7 @@ public class AppTest {
     @DisplayName("'main' method works correctly")
 
     private void testAbstract(String filePath1, String filePath2) throws Exception {
-        var path = Paths.get("src\\test\\resources\\expected").toAbsolutePath().normalize();
+        var path = Paths.get("src/test/resources/expected").toAbsolutePath().normalize();
         var expected = Files.readString(path);
         var actual = Differ.generate(filePath1, filePath2);
 
