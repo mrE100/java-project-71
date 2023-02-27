@@ -12,7 +12,7 @@ public class Stylish {
         String operation;
         String keyValue;
         String key;
-        for (String[] string : data){
+        for (String[] string : data) {
             String operand = string[0];
             key = string[1];
             keyValue = string[2];

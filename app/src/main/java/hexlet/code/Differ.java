@@ -41,8 +41,9 @@ public class Differ {
         }
         if (format.equals("stylish")) {
             return Stylish.format(data);
+        } else {
+            return null;
         }
-        else return null;
     }
 
     public static String generate(String filepath1, String filepath2) throws Exception {
