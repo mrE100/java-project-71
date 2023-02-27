@@ -7,8 +7,8 @@ public class Stylish {
 
     public static String format(List<String[]> data) {
         StringBuilder builder = new StringBuilder();
-        builder.append("{\r\n");
-//        builder.append("{\n");
+//        builder.append("{\r\n");
+        builder.append("{\n");
         String operation;
         String keyValue;
         String key;
@@ -29,8 +29,8 @@ public class Stylish {
                 default:
                     throw new IllegalStateException("Unexpected value: " + operand);
             }
-            builder.append(operation).append(key).append(": ").append(keyValue).append("\r\n");
-//            builder.append(operation).append(key).append(": ").append(keyValue).append("\n");
+//            builder.append(operation).append(key).append(": ").append(keyValue).append("\r\n");
+            builder.append(operation).append(key).append(": ").append(keyValue).append("\n");
         }
         builder.append("}");
         return builder.toString();
