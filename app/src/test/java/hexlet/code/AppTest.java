@@ -23,11 +23,11 @@ public class AppTest {
     public static void beforeAll() {
 //        resourcesPath = new File(".").getAbsolutePath();
 
-        jsonFilePath1 = "filepath1.json";
-        jsonFilePath2 = "filepath2.json";
+        jsonFilePath1 = "file1.json";
+        jsonFilePath2 = "file2.json";
 
-        yamlFilePath1 = "filepath1.yml";
-        yamlFilePath2 = "filepath2.yml";
+        yamlFilePath1 = "file1.yml";
+        yamlFilePath2 = "file2.yml";
     }
 
     @Test
@@ -43,7 +43,7 @@ public class AppTest {
     @DisplayName("'main' method works correctly")
 
     private void testAbstract(String filePath1, String filePath2) throws Exception {
-        var path = Paths.get("src/test/resources/expected").toAbsolutePath().normalize();
+        var path = Paths.get("src/test/resources/expected2").toAbsolutePath().normalize();
         var expected = Files.readString(path);
         var actual = Differ.generate(filePath1, filePath2);
 
