@@ -1,6 +1,7 @@
 package hexlet.code.formatter;
 
-import java.util.*;
+
+import java.util.List;
 
 public class Stylish {
 
