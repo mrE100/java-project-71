@@ -7,7 +7,8 @@ import java.util.Map;
 
 public class Plain {
 
-    public static String format(Map<String, Map<String, String>> data) {StringBuilder builder = new StringBuilder();
+    public static String format(Map<String, Map<String, String>> data) {
+        StringBuilder builder = new StringBuilder();
         String keyValue;
         for (String key : data.keySet()) {
             Map<String, String> keyData = data.get(key);
@@ -40,8 +41,8 @@ public class Plain {
 
     private static String valueToString(String value) {
         if (value != null) {
-            if ((value.startsWith("{") && value.endsWith("}")) ||
-                    (value.startsWith("[") && value.endsWith("]"))) {
+            if ((value.startsWith("{") && value.endsWith("}"))
+                    || (value.startsWith("[") && value.endsWith("]"))) {
                 return "[complex value]";
             }
             if (!List.of("true", "false", "null").contains(value) && !StringUtils.isNumeric(value)) {
