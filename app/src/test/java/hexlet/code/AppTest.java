@@ -50,6 +50,16 @@ public class AppTest {
         testPlain(yamlFilePath1, yamlFilePath2);
     }
 
+    @Test
+    public void testJsonJson() throws Exception {
+        testPlain(jsonFilePath1, jsonFilePath2);
+    }
+
+    @Test
+    public void testYamljson() throws Exception {
+        testPlain(yamlFilePath1, yamlFilePath2);
+    }
+
     @DisplayName("'main' method works correctly")
 
     private void testStylish(String filePath1, String filePath2) throws Exception {
@@ -63,6 +73,14 @@ public class AppTest {
         var path = Paths.get("src/test/resources/expectedPlain").toAbsolutePath().normalize();
         var expected = Files.readString(path);
         var actual = Differ.generate(filePath1, filePath2, "plain");
+
+        assertEquals(expected, actual);
+    }
+
+    private void testJson(String filePath1, String filePath2) throws Exception {
+        var path = Paths.get("src/test/resources/expectedJson").toAbsolutePath().normalize();
+        var expected = Files.readString(path);
+        var actual = Differ.generate(filePath1, filePath2, "json");
 
         assertEquals(expected, actual);
     }
