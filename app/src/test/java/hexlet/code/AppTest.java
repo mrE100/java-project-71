@@ -62,7 +62,7 @@ public class AppTest {
     private void testPlain(String filePath1, String filePath2) throws Exception {
         var path = Paths.get("src/test/resources/expectedPlain").toAbsolutePath().normalize();
         var expected = Files.readString(path);
-        var actual = Differ.generate(filePath1, filePath2,"plain");
+        var actual = Differ.generate(filePath1, filePath2, "plain");
 
         assertEquals(expected, actual);
     }
