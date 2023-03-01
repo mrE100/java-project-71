@@ -1,21 +1,20 @@
 package hexlet.code.formatter;
 
 
-import java.util.List;
+import java.util.Map;
 
 public class Stylish {
 
-    public static String format(List<String[]> data) {
+    public static String format(Map<String, Map<String, String>> data) {
         StringBuilder builder = new StringBuilder();
 //        builder.append("{\r\n");
         builder.append("{\n");
         String operation;
         String keyValue;
-        String key;
-        for (String[] string : data) {
-            String operand = string[0];
-            key = string[1];
-            keyValue = string[2];
+        for (String key : data.keySet()) {
+            Map<String, String> keyData = data.get(key);
+            String operand = keyData.get("type");
+            keyValue = keyData.get("value");
             switch (operand) {
                 case "deleted":
                     operation = "   - ";
@@ -25,6 +24,13 @@ public class Stylish {
                     break;
                 case "unchanged":
                     operation = "     ";
+                    break;
+                case "changed":
+                    operation = "   - ";
+//                    builder.append(operation).append(key).append(": ").append(keyData.get("value1")).append("\r\n");
+                    builder.append(operation).append(key).append(": ").append(keyData.get("value1")).append("\n");
+                    operation = "   + ";
+                    keyValue = keyData.get("value2");
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + operand);

@@ -5,12 +5,11 @@ import hexlet.code.formatter.Stylish;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.Collections;
-import java.util.Set;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
 
 public class Differ {
     public static String generate(String filepath1, String filepath2, String format) throws Exception {
@@ -18,32 +17,31 @@ public class Differ {
         Map<String, String> value1 = Parser.parse(Files.readString(path1));
         Path path2 = Paths.get(filepath2).toAbsolutePath().normalize();
         Map<String, String> value2 = Parser.parse(Files.readString(path2));
-        List<String[]> data = new ArrayList<>();
-//        builder.append("{\n");
-        Set<String> keys = new HashSet<>();
+        TreeMap<String, LinkedHashMap<String, String>> data = new TreeMap<>();
+        TreeSet<String> keys = new TreeSet<>();
         keys.addAll(value1.keySet());
         keys.addAll(value2.keySet());
-        List<String> sortedKeys = new ArrayList<>(keys);
-        Collections.sort(sortedKeys);
-        for (String key : sortedKeys) {
+        for (String key : keys) {
+            LinkedHashMap<String, String> keyData = new LinkedHashMap<>();
             if (value1.containsKey(key) && !value2.containsKey(key)) {
-                data.add(new String[]{"deleted", key, String.valueOf(value1.get(key))});
+                keyData.put("type", "deleted");
+                keyData.put("value", String.valueOf(value1.get(key)));
             } else if (value2.containsKey(key) && !value1.containsKey(key)) {
-                data.add(new String[]{"added", key, String.valueOf(value2.get(key))});
+                keyData.put("type", "added");
+                keyData.put("value", String.valueOf(value2.get(key)));
             } else {
                 if (String.valueOf(value1.get(key)).equals(String.valueOf(value2.get(key)))) {
-                    data.add(new String[]{"unchanged", key, String.valueOf(value1.get(key))});
+                    keyData.put("type", "unchanged");
+                    keyData.put("value", String.valueOf(value1.get(key)));
                 } else {
-                    data.add(new String[]{"deleted", key, String.valueOf(value1.get(key))});
-                    data.add(new String[]{"added", key, String.valueOf(value2.get(key))});
+                    keyData.put("type", "changed");
+                    keyData.put("value1", String.valueOf(value1.get(key)));
+                    keyData.put("value2", String.valueOf(value2.get(key)));
                 }
             }
+            data.put(key, keyData);
         }
-        if (format.equals("stylish")) {
-            return Stylish.format(data);
-        } else {
-            return null;
-        }
+        return Formatter.getOutputText(data, format);
     }
 
     public static String generate(String filepath1, String filepath2) throws Exception {
