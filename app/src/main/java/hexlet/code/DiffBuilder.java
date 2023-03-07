@@ -1,10 +1,14 @@
 package hexlet.code;
 
-import java.util.*;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class DiffBuilder {
 
-    public static TreeMap generateDiff(Map<String, Object> value1, Map<String, Object> value2){
+    public static TreeMap generateDiff(Map<String, Object> value1, Map<String, Object> value2) {
         TreeMap<String, LinkedHashMap<String, Object>> data = new TreeMap<>();
         TreeSet<String> keys = new TreeSet<>();
         keys.addAll(value1.keySet());
