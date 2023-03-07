@@ -13,7 +13,6 @@ import java.nio.file.Paths;
 
 
 public class AppTest {
-//    private static String resourcesPath;
     private static String jsonFilePath1;
     private static String jsonFilePath2;
     private static String yamlFilePath1;
@@ -21,13 +20,13 @@ public class AppTest {
 
     @BeforeAll
     public static void beforeAll() {
-//        resourcesPath = new File(".").getAbsolutePath();
 
-        jsonFilePath1 = "file1.json";
-        jsonFilePath2 = "file2.json";
+        jsonFilePath1 = "src/test/resources/file1.json";
+        jsonFilePath2 = "src/test/resources/file2.json";
 
-        yamlFilePath1 = "file1.yml";
-        yamlFilePath2 = "file2.yml";
+        yamlFilePath1 = "src/test/resources/file1.yml";
+        yamlFilePath2 = "src/test/resources/file2.yml";
+
     }
 
     @Test
@@ -52,7 +51,7 @@ public class AppTest {
 
     @Test
     public void testJsonJson() throws Exception {
-        testPlain(jsonFilePath1, jsonFilePath2);
+        testJson(jsonFilePath1, jsonFilePath2);
     }
 
     @Test

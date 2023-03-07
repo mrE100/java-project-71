@@ -24,8 +24,6 @@ public class App implements Callable<Integer> {
     @Option(names = {"-f", "--format"}, description = "output format [default: stylish]")
     private String format = "stylish";
 
-//    private ObjectMapper mapper = new ObjectMapper();
-
     @Override
     public Integer call() throws Exception {
         try {
@@ -36,29 +34,9 @@ public class App implements Callable<Integer> {
         }
     }
 
-//    private static Map<String, String> parse(String content) throws Exception {
-//        ObjectMapper mapper = new ObjectMapper();
-//        Map<String, String> value = mapper.readValue(content, Map.class);
-//        return value;
-//    }
-
     public static void main(String[] args) {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
-//        Map<String, String> firstFile = new HashMap<>();
-//        Map<String, String> secondFile = new HashMap<>();
-//        String filepath1 = "./app/filepath1.json";
-//        String filepath2 = "./app/filepath2.json";
-//        try {
-//            Path path1 = Paths.get(String.valueOf(filepath1)).toAbsolutePath().normalize();
-//            Map<String, String> value1 = parse(Files.readString(path1));
-//            System.out.println(value1);
-//            Path path2 = Paths.get(String.valueOf(filepath2)).toAbsolutePath().normalize();
-//            Map<String, String> value2 = parse(Files.readString(path2));
-//            System.out.println(Differ.generate(value1, value2));
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
     }
 
 }

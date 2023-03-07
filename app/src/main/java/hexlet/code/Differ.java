@@ -1,45 +1,34 @@
 package hexlet.code;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 
 public class Differ {
     public static String generate(String filepath1, String filepath2, String format) throws Exception {
-        Path path1 = Paths.get(filepath1).toAbsolutePath().normalize();
-        Map<String, String> value1 = Parser.parse(Files.readString(path1));
-        Path path2 = Paths.get(filepath2).toAbsolutePath().normalize();
-        Map<String, String> value2 = Parser.parse(Files.readString(path2));
-        TreeMap<String, LinkedHashMap<String, String>> data = new TreeMap<>();
-        TreeSet<String> keys = new TreeSet<>();
-        keys.addAll(value1.keySet());
-        keys.addAll(value2.keySet());
-        for (String key : keys) {
-            LinkedHashMap<String, String> keyData = new LinkedHashMap<>();
-            if (value1.containsKey(key) && !value2.containsKey(key)) {
-                keyData.put("type", "deleted");
-                keyData.put("value", String.valueOf(value1.get(key)));
-            } else if (value2.containsKey(key) && !value1.containsKey(key)) {
-                keyData.put("type", "added");
-                keyData.put("value", String.valueOf(value2.get(key)));
-            } else {
-                if (String.valueOf(value1.get(key)).equals(String.valueOf(value2.get(key)))) {
-                    keyData.put("type", "unchanged");
-                    keyData.put("value", String.valueOf(value1.get(key)));
-                } else {
-                    keyData.put("type", "changed");
-                    keyData.put("value1", String.valueOf(value1.get(key)));
-                    keyData.put("value2", String.valueOf(value2.get(key)));
-                }
-            }
-            data.put(key, keyData);
-        }
+        Map value1 = getData(filepath1);
+        Map value2 = getData(filepath2);
+        TreeMap data = DiffBuilder.generateDiff(value1, value2);
         return Formatter.getOutputText(data, format);
+    }
+
+    private static Map getData(String filepath) throws Exception {
+        Path path = Paths.get(filepath).toAbsolutePath().normalize();
+        String format = getFormat(path);
+        return Parser.parse(Files.readString(path), format);
+    }
+
+    private static String getFormat(Path path) {
+        String fileNameStr = path.getFileName().toString();
+        int lastDot = fileNameStr.lastIndexOf('.');
+        if (lastDot == -1) {
+            return "";
+        } else {
+            return fileNameStr.substring(lastDot + 1);
+        }
     }
 
     public static String generate(String filepath1, String filepath2) throws Exception {
