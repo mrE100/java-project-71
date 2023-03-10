@@ -16,26 +16,26 @@ public class Plain {
             keyValue = valueToString(keyData.get("value"));
             switch (operand) {
                 case "deleted":
-                    builder.append(String.format("Property '%s' was removed\r\n", key));
-//                    builder.append(String.format("Property '%s' was removed\n", key));
+//                    builder.append(String.format("Property '%s' was removed\r\n", key));
+                    builder.append(String.format("Property '%s' was removed\n", key));
                     break;
                 case "added":
-                    builder.append(String.format("Property '%s' was added with value: %s\r\n", key, keyValue));
-//                    builder.append(String.format("Property '%s' was added with value: %s\n", key, keyValue));
+//                    builder.append(String.format("Property '%s' was added with value: %s\r\n", key, keyValue));
+                    builder.append(String.format("Property '%s' was added with value: %s\n", key, keyValue));
                     break;
                 case "unchanged":
                     break;
                 case "changed":
-                    builder.append(String.format("Property '%s' was updated. From %s to %s\r\n", key,
-//                    builder.append(String.format("Property '%s' was updated. From %s to %s\n", key,
+//                    builder.append(String.format("Property '%s' was updated. From %s to %s\r\n", key,
+                    builder.append(String.format("Property '%s' was updated. From %s to %s\n", key,
                             valueToString(keyData.get("value1")), valueToString(keyData.get("value2"))));
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + operand);
             }
         }
-        builder.replace(builder.lastIndexOf("\r\n"), builder.length(), "");
-//        builder.replace(builder.lastIndexOf("\n"), builder.length(), "");
+//        builder.replace(builder.lastIndexOf("\r\n"), builder.length(), "");
+        builder.replace(builder.lastIndexOf("\n"), builder.length(), "");
         return builder.toString();
     }
 
