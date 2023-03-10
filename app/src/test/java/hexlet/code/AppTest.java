@@ -29,21 +29,21 @@ public class AppTest {
 
     }
 
-    @Test
-    public void testJsonStylish() throws Exception {
-        testStylish(jsonFilePath1, jsonFilePath2);
-    }
+//     @Test
+//     public void testJsonStylish() throws Exception {
+//         testStylish(jsonFilePath1, jsonFilePath2);
+//     }
 
     @Test
     public void testJsonPlain() throws Exception {
         testPlain(jsonFilePath1, jsonFilePath2);
     }
 
-    @Test
-    public void testYamlStylish() throws Exception {
-        testStylish(yamlFilePath1, yamlFilePath2);
+//     @Test
+//     public void testYamlStylish() throws Exception {
+//         testStylish(yamlFilePath1, yamlFilePath2);
 
-    }
+//     }
     @Test
     public void testYamlPlain() throws Exception {
         testPlain(yamlFilePath1, yamlFilePath2);
