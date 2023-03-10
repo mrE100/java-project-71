@@ -8,7 +8,7 @@ public class Stylish {
     public static String format(Map<String, Map<String, String>> data) {
         StringBuilder builder = new StringBuilder();
 //        builder.append("{\r\n");
-        builder.append("{\r");
+        builder.append("{\n");
         String operation;
         String keyValue;
         for (String key : data.keySet()) {
@@ -28,7 +28,7 @@ public class Stylish {
                 case "changed":
                     operation = "   - ";
 //                    builder.append(operation).append(key).append(": ").append(keyData.get("value1")).append("\r\n");
-                    builder.append(operation).append(key).append(": ").append(keyData.get("value1")).append("\r");
+                    builder.append(operation).append(key).append(": ").append(keyData.get("value1")).append("\n");
                     operation = "   + ";
                     keyValue = keyData.get("value2");
                     break;
@@ -36,7 +36,7 @@ public class Stylish {
                     throw new IllegalStateException("Unexpected value: " + operand);
             }
 //            builder.append(operation).append(key).append(": ").append(keyValue).append("\r\n");
-            builder.append(operation).append(key).append(": ").append(keyValue).append("\r");
+            builder.append(operation).append(key).append(": ").append(keyValue).append("\n");
         }
         builder.append("}");
         return builder.toString();
