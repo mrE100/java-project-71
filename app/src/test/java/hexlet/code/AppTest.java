@@ -34,16 +34,16 @@ public class AppTest {
 //         testStylish(jsonFilePath1, jsonFilePath2);
 //     }
 
-//     @Test
-//     public void testJsonPlain() throws Exception {
-//         testPlain(jsonFilePath1, jsonFilePath2);
-//     }
+    @Test
+    public void testJsonPlain() throws Exception {
+        testPlain(jsonFilePath1, jsonFilePath2);
+    }
 
 //     @Test
 //     public void testYamlStylish() throws Exception {
 //         testStylish(yamlFilePath1, yamlFilePath2);
 
-//     }
+    }
     @Test
     public void testYamlPlain() throws Exception {
         testPlain(yamlFilePath1, yamlFilePath2);
@@ -61,12 +61,12 @@ public class AppTest {
 
     @DisplayName("'main' method works correctly")
 
-    private void testStylish(String filePath1, String filePath2) throws Exception {
-        var path = Paths.get("src/test/resources/expectedStylish").toAbsolutePath().normalize();
-        var expected = Files.readString(path);
-        var actual = Differ.generate(filePath1, filePath2, "stylish");
-        assertEquals(expected, actual);
-    }
+//     private void testStylish(String filePath1, String filePath2) throws Exception {
+//         var path = Paths.get("src/test/resources/expectedStylish").toAbsolutePath().normalize();
+//         var expected = Files.readString(path);
+//         var actual = Differ.generate(filePath1, filePath2, "stylish");
+//         assertEquals(expected, actual);
+//     }
 
     private void testPlain(String filePath1, String filePath2) throws Exception {
         var path = Paths.get("src/test/resources/expectedPlain").toAbsolutePath().normalize();
