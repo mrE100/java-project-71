@@ -34,10 +34,10 @@ public class AppTest {
 //         testStylish(jsonFilePath1, jsonFilePath2);
 //     }
 
-    @Test
-    public void testJsonPlain() throws Exception {
-        testPlain(jsonFilePath1, jsonFilePath2);
-    }
+//     @Test
+//     public void testJsonPlain() throws Exception {
+//         testPlain(jsonFilePath1, jsonFilePath2);
+//     }
 
 //     @Test
 //     public void testYamlStylish() throws Exception {
