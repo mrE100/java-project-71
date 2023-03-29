@@ -16,7 +16,7 @@ public class DiffBuilder {
         keys.addAll(value1.keySet());
         keys.addAll(value2.keySet());
         for (var key : keys) {
-            Map keyData = new LinkedHashMap<>(4);
+            Map keyData = new LinkedHashMap<>();
             // используем LinkedHashMap чтобы сохранить последовательность добавления значений - требуется для
             // форматтера Json
             if (value1.containsKey(key) && !value2.containsKey(key)) {

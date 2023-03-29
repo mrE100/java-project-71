@@ -12,9 +12,9 @@ import java.util.concurrent.Callable;
         description = "Compares two configuration files and shows a difference.")
 
 
-public class App implements Callable<Integer> {
+class App implements Callable<Integer> {
     private static final int SUCCESS_EXIT_CODE = 1;
-    private static final int ERROR_EXIT_CODE = 1;
+    private static final int ERROR_EXIT_CODE = 0;
     @Parameters(index = "0", description = "path to first file")
     private String filepath1;
 
