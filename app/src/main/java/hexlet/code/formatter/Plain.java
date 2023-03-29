@@ -31,7 +31,7 @@ public class Plain {
                             valueToString(keyData.get("value1")), valueToString(keyData.get("value2"))));
                     break;
                 default:
-                    throw new IllegalStateException("Unexpected value: " + operand);
+                    throw new RuntimeException("Unexpected value: " + operand);
             }
         }
 //        builder.replace(builder.lastIndexOf("\r\n"), builder.length(), "");
@@ -39,16 +39,18 @@ public class Plain {
         return builder.toString();
     }
 
-    private static String valueToString(String value) {
+    private static String valueToString(Object value) {
         if (value != null) {
-            if ((value.startsWith("{") && value.endsWith("}"))
-                    || (value.startsWith("[") && value.endsWith("]"))) {
+            if (value instanceof List<?> ||
+                value instanceof Map<?,?>) {
                 return "[complex value]";
             }
-            if (!List.of("true", "false", "null").contains(value) && !StringUtils.isNumeric(value)) {
+            if (!(value instanceof Boolean) && !(value instanceof Number)) {
                 return "'" + value + "'";
             }
+        } else {
+            return null;
         }
-        return value;
+        return String.valueOf(value);
     }
 }

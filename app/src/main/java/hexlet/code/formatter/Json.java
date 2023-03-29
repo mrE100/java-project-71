@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Map;
 
 public class Json {
-    public static String format(Map<String, Map<String, String>> data) throws JsonProcessingException {
+    public static String format(Map<String, Object> diff) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(data);
+        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(diff);
     }
 }

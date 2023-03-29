@@ -17,6 +17,9 @@ public class AppTest {
     private static String jsonFilePath2;
     private static String yamlFilePath1;
     private static String yamlFilePath2;
+    private static String expectedStylish;
+    private static String expectedJson;
+    private static String expectedPlain;
 
     @BeforeAll
     public static void beforeAll() {
@@ -27,6 +30,24 @@ public class AppTest {
         yamlFilePath1 = "src/test/resources/file1.yml";
         yamlFilePath2 = "src/test/resources/file2.yml";
 
+        try {
+            var path = Paths.get("src/test/resources/expectedStylish").toAbsolutePath().normalize();
+            expectedStylish = Files.readString(path);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            var path = Paths.get("src/test/resources/expectedPlain").toAbsolutePath().normalize();
+            expectedPlain = Files.readString(path);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            var path = Paths.get("src/test/resources/expectedJson").toAbsolutePath().normalize();
+            expectedJson = Files.readString(path);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Test
@@ -62,25 +83,20 @@ public class AppTest {
     @DisplayName("'main' method works correctly")
 
     private void testStylish(String filePath1, String filePath2) throws Exception {
-        var path = Paths.get("src/test/resources/expectedStylish").toAbsolutePath().normalize();
-        var expected = Files.readString(path);
         var actual = Differ.generate(filePath1, filePath2, "stylish");
-        assertEquals(expected, actual);
+        assertEquals(expectedStylish, actual);
     }
 
     private void testPlain(String filePath1, String filePath2) throws Exception {
-        var path = Paths.get("src/test/resources/expectedPlain").toAbsolutePath().normalize();
-        var expected = Files.readString(path);
+
         var actual = Differ.generate(filePath1, filePath2, "plain");
 
-        assertEquals(expected, actual);
+        assertEquals(expectedPlain, actual);
     }
 
     private void testJson(String filePath1, String filePath2) throws Exception {
-        var path = Paths.get("src/test/resources/expectedJson").toAbsolutePath().normalize();
-        var expected = Files.readString(path);
         var actual = Differ.generate(filePath1, filePath2, "json");
 
-        assertEquals(expected, actual);
+        assertEquals(expectedJson, actual);
     }
 }

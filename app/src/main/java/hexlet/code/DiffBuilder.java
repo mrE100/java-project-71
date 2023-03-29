@@ -5,16 +5,18 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.Set;
+import java.util.Objects;
 
 public class DiffBuilder {
 
-    public static TreeMap generateDiff(Map<String, Object> value1, Map<String, Object> value2) {
-        TreeMap<String, LinkedHashMap<String, Object>> data = new TreeMap<>();
-        TreeSet<String> keys = new TreeSet<>();
+    public static Map generateDiff(Map<String, Object> value1, Map<String, Object> value2) {
+        Map data = new TreeMap<>();
+        Set keys = new TreeSet<>();
         keys.addAll(value1.keySet());
         keys.addAll(value2.keySet());
-        for (String key : keys) {
-            LinkedHashMap<String, Object> keyData = new LinkedHashMap<>(4);
+        for (var key : keys) {
+            Map keyData = new LinkedHashMap<>(4);
             // используем LinkedHashMap чтобы сохранить последовательность добавления значений - требуется для
             // форматтера Json
             if (value1.containsKey(key) && !value2.containsKey(key)) {
@@ -26,13 +28,7 @@ public class DiffBuilder {
             } else {
                 Object value1value = value1.get(key);
                 Object value2value = value2.get(key);
-                if (value1value == null) {
-                    value1value = "null";
-                }
-                if (value2value == null) {
-                    value2value = "null";
-                }
-                if (value1value.equals(value2value)) {
+                if (Objects.equals(value1value, value2value)) {
                     keyData.put("type", "unchanged");
                     keyData.put("value", value1value);
                 } else {

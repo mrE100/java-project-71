@@ -29,10 +29,10 @@ public class Parser {
     }
 
     private static Map stringifyMapValues(Map<String, Object> data) {
-        HashMap<String, String> result = new HashMap<>();
+        Map result = new HashMap<>();
         for (String key : data.keySet()) {
             Object value = data.get(key);
-            result.put(key, String.valueOf(value));
+            result.put(key, value);
         }
         return result;
     }
