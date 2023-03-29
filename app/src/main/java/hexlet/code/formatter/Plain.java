@@ -1,7 +1,5 @@
 package hexlet.code.formatter;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.List;
 import java.util.Map;
 
@@ -41,8 +39,8 @@ public class Plain {
 
     private static String valueToString(Object value) {
         if (value != null) {
-            if (value instanceof List<?> ||
-                value instanceof Map<?,?>) {
+            if (value instanceof List<?>
+                    || value instanceof Map<?, ?>) {
                 return "[complex value]";
             }
             if (!(value instanceof Boolean) && !(value instanceof Number)) {
